@@ -1,0 +1,30 @@
+{
+  "manifest_version": 3,
+  "name": "Bot Employee",
+  "version": "1.0",
+  "description": "Executar automações DDD via plugin do Chrome",
+  "action": {
+    "default_popup": "html/index.html",
+    "default_icon": {
+      "16": "asset/icon.png",
+      "48": "asset/icon.png",
+      "128": "asset/icon.png"
+    }
+  },
+  "permissions": [
+    "activeTab",
+    "scripting"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "icons": {
+    "16": "asset/icon.png",
+    "48": "asset/icon.png",
+    "128": "asset/icon.png"
+  },
+  "background": {
+    "service_worker": "js/background.js"
+  }
+}
+

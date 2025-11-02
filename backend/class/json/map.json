@@ -1,0 +1,10 @@
+{
+	"paginaPrincipal": {
+		"campos": {
+			 "css": "#mG61Hd > div.RH5hzf.RLS9Fe > div > div.o3Dpx > div:nth-child(INDEX) input"
+		},
+		"botao":{
+			"css": "#mG61Hd > div.RH5hzf.RLS9Fe > div > div.ThHDze > div.DE3NNc.CekdCb > div.lRwqcd > div > span > span"
+		}
+	}
+}
