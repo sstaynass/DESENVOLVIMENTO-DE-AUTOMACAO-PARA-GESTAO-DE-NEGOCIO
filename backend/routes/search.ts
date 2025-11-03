@@ -26,7 +26,10 @@ async function preencheDados(primitive: Primitive){
 }
 
 export async function acessSite(app: FastifyInstance) {
-	app.post("/search", async () => {
+	app.post("/search", async (request) => {
+		const body = request.body as { rotinas?: string[] } | undefined;
+		const rotinas = body?.rotinas || [];
+
 		const primitive = new Primitive();
 		const retry = new RetryToolkitWithAsyncReport();
 

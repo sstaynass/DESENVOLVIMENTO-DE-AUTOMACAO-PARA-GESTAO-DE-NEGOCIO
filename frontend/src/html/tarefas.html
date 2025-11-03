@@ -6,33 +6,84 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-    <title>Bot Employee</title>
+    <title>Bot Employee - Tarefas</title>
     <style>
         body {
             width: 630px;
         }
+        .loading {
+            opacity: 0.6;
+            pointer-events: none;
+        }
+        .notification {
+            margin-top: 1rem;
+            display: none;
+        }
+        .notification.show {
+            display: block;
+        }
+        .spinner {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid #f3f3f3;
+            border-top: 2px solid #3273dc;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-right: 8px;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .progress-container {
+            margin-top: 1rem;
+            display: none;
+        }
+        .progress-container.active {
+            display: block;
+        }
+        .progress-step {
+            padding: 0.5rem;
+            margin: 0.25rem 0;
+            border-radius: 4px;
+            background-color: #f5f5f5;
+            transition: all 0.3s ease;
+        }
+        .progress-step.active {
+            background-color: #e3f2fd;
+            border-left: 3px solid #3273dc;
+        }
+        .progress-step.completed {
+            background-color: #e8f5e9;
+            border-left: 3px solid #48c774;
+        }
+        .progress-step.error {
+            background-color: #ffebee;
+            border-left: 3px solid #f14668;
+        }
+        .rotina-item {
+            margin-bottom: 0.75rem;
+            padding: 0.75rem;
+            border: 1px solid #dbdbdb;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+        .rotina-item.running {
+            background-color: #e3f2fd;
+            border-color: #3273dc;
+        }
+        .rotina-item.completed {
+            background-color: #e8f5e9;
+            border-color: #48c774;
+        }
+        .rotina-item.error {
+            background-color: #ffebee;
+            border-color: #f14668;
+        }
     </style>
-    <script defer>
-        // Botão limpar seleção
-        document.getElementById('btn-limpar').addEventListener('click', () => {
-            const checkboxes = document.querySelectorAll('input[name="rotinas"]');
-            checkboxes.forEach(chk => chk.checked = false);
-        });
-
-        // Botão disparar automações
-        document.getElementById('btn-disparar').addEventListener('click', () => {
-            const selected = [];
-            document.querySelectorAll('input[name="rotinas"]:checked').forEach(chk => {
-                selected.push(chk.nextElementSibling.textContent.trim());
-            });
-            if (selected.length === 0) {
-                alert('Selecione ao menos uma rotina para disparar a automação.');
-                return;
-            }
-            alert('Disparando automações para: ' + selected.join(', '));
-            // Aqui você pode adicionar a lógica real para disparar as automações
-        });
-    </script>
+    <script src="../js/api.js"></script>
+    <script src="../js/tarefas.js"></script>
 </head>
 
 <body>
@@ -42,27 +93,25 @@
         <h1 class="is-size-3 has-text-link mx-4 mb-3 has-text-centered">Bot Employee</h1>
         <div class="fixed-grid has-4-cols">
             <nav class="grid buttons are-normal">
-                <button class="column button" onclick="location.href='index.html'">Home</button>
-                <button class="column button" onclick="location.href='tarefas.html'">Tarefas</button>
-                <button class="column button" onclick="location.href='analisticos.html'">Analíticos</button>
-                <button class="column button" onclick="location.href='sobre.html'">Sobre</button>
+                <button class="column button" data-nav="index.html">Home</button>
+                <button class="column button" data-nav="tarefas.html">Tarefas</button>
+                <button class="column button" data-nav="analisticos.html">Analíticos</button>
+                <button class="column button" data-nav="sobre.html">Sobre</button>
             </nav>
         </div>
 
-        <!--Mensagens-->
-
-        <div class="message">
+        <!--Instruções de Uso-->
+        <div class="message is-info">
             <div class="message-header">
-                <label>Avisos</label>
+                <label>📖 Como Usar</label>
             </div>
             <div class="message-body">
-                <p>Para que o plugin funcione corretamente alguns requisitos precisam ser atendidos, certifique-se que:
-                </p>
-                <p>Há conexão com a internet no mínimo 10 mega !;</p>
-                <p>Que não esta havendo manutenção em algum dos sites que ela utiliza !;</p>
-                <p>Se mesmo satisfeitas as condições acima o plugin não funcionar entrar em contato
-                <address>vinifreitass20@gmail.com</address>
-                </p>
+                <p><strong>1. Selecione as Rotinas:</strong> Marque os checkboxes das automações que deseja executar.</p>
+                <p><strong>2. Disparar Automações:</strong> Clique no botão "Disparar automações" para iniciar o processo.</p>
+                <p><strong>3. Acompanhe o Progresso:</strong> O sistema mostrará o status de cada etapa em tempo real.</p>
+                <p><strong>4. Verifique os Relatórios:</strong> Acesse a aba "Analíticos" para ver os relatórios completos das execuções.</p>
+                <hr style="margin: 0.75rem 0;">
+                <p><small><strong>⚠️ Requisitos:</strong> Certifique-se de ter conexão estável (mínimo 10 Mbps) e que não há manutenção nos sites utilizados.</small></p>
             </div>
         </div>
 
@@ -70,24 +119,46 @@
         <div class="box mt-5">
             <h2 class="is-size-4 has-text-link mb-3">Rotinas Automatizadas</h2>
 
-            <div class="field">
-                <input id="checkbox-follow-up" type="checkbox" name="rotinas" class="is-checkradio" />
-                <label for="checkbox-follow-up">Fazer follow up</label>
-            </div>
+            <div id="rotinas-container">
+                <div class="rotina-item" data-rotina="follow-up">
+                    <div class="field">
+                        <input id="checkbox-follow-up" type="checkbox" name="rotinas" value="follow-up" />
+                        <label for="checkbox-follow-up"><strong>Fazer follow up</strong></label>
+                    </div>
+                    <div class="rotina-status" style="display: none; margin-top: 0.5rem; font-size: 0.875rem;"></div>
+                </div>
 
-            <div class="field">
-                <input id="checkbox-notas-fiscais" type="checkbox" name="rotinas" class="is-checkradio" />
-                <label for="checkbox-notas-fiscais">Registrar notas fiscais</label>
-            </div>
+                <div class="rotina-item" data-rotina="notas-fiscais">
+                    <div class="field">
+                        <input id="checkbox-notas-fiscais" type="checkbox" name="rotinas" value="notas-fiscais" />
+                        <label for="checkbox-notas-fiscais"><strong>Registrar notas fiscais</strong></label>
+                    </div>
+                    <div class="rotina-status" style="display: none; margin-top: 0.5rem; font-size: 0.875rem;"></div>
+                </div>
 
-            <div class="field">
-                <input id="checkbox-automacao-extra" type="checkbox" name="rotinas" class="is-checkradio" />
-                <label for="checkbox-automacao-extra">Automação extra</label>
+                <div class="rotina-item" data-rotina="automacao-extra">
+                    <div class="field">
+                        <input id="checkbox-automacao-extra" type="checkbox" name="rotinas" value="automacao-extra" />
+                        <label for="checkbox-automacao-extra"><strong>Automação extra</strong></label>
+                    </div>
+                    <div class="rotina-status" style="display: none; margin-top: 0.5rem; font-size: 0.875rem;"></div>
+                </div>
             </div>
 
             <div class="buttons mt-4">
-                <button id="btn-disparar" class="button is-link">Disparar automações</button>
+                <button id="btn-disparar" class="button is-link">🚀 Disparar automações</button>
                 <button id="btn-limpar" class="button is-light">Limpar seleção</button>
+            </div>
+
+            <!-- Progresso das automações -->
+            <div id="progress-container" class="progress-container">
+                <h3 class="is-size-5 mb-3 mt-4">📊 Progresso da Execução</h3>
+                <div id="progress-steps"></div>
+            </div>
+
+            <!-- Notificação de status -->
+            <div id="notification" class="notification">
+                <div id="notification-message"></div>
             </div>
         </div>
 

@@ -16,7 +16,9 @@
     "scripting"
   ],
   "host_permissions": [
-    "<all_urls>"
+    "<all_urls>",
+    "http://localhost:3333/*",
+    "http://127.0.0.1:3333/*"
   ],
   "icons": {
     "16": "asset/icon.png",

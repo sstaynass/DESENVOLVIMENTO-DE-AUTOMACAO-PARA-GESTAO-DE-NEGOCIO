@@ -11,7 +11,51 @@
         body {
             width: 630px;
         }
+        .spinner {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid #f3f3f3;
+            border-top: 2px solid #3273dc;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-right: 8px;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .report-container {
+            margin-top: 1rem;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        .report-item {
+            padding: 0.75rem;
+            margin-bottom: 0.5rem;
+            border-left: 3px solid #3273dc;
+            background-color: #f5f5f5;
+        }
+        .report-item.success {
+            border-left-color: #48c774;
+        }
+        .report-item.error {
+            border-left-color: #f14668;
+        }
+        .report-item.warning {
+            border-left-color: #ffdd57;
+        }
+        pre {
+            background-color: #1e1e1e;
+            color: #d4d4d4;
+            padding: 1rem;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-size: 0.85rem;
+        }
     </style>
+    <script src="../js/api.js"></script>
+    <script src="../js/analisticos.js"></script>
 </head>
 
 <body>
@@ -21,37 +65,53 @@
         <h1 class="is-size-3 has-text-link mx-4 mb-3 has-text-centered">Bot Employee</h1>
         <div class="fixed-grid has-4-cols">
             <nav class="grid buttons are-normal">
-                <button class="column button"><a href="index.html">Home</a></button>
-                <button class="column button"><a href="tarefas.html">Tarefas</a></button>
-                <button class="column button"><a href="analisticos.html">Analíticos</a></button>
-                <button class="column button"><a href="sobre.html">Sobre</a></button>
+                <button class="column button" data-nav="index.html">Home</button>
+                <button class="column button" data-nav="tarefas.html">Tarefas</button>
+                <button class="column button" data-nav="analisticos.html">Analíticos</button>
+                <button class="column button" data-nav="sobre.html">Sobre</button>
             </nav>
         </div>
 
-        <!--Mensagens-->
-        <div class="message">
+        <!--Informações sobre Relatórios-->
+        <div class="message is-info mt-5">
             <div class="message-header">
-                <label>Bem vindo !</label>
+                <label>📊 Sobre os Relatórios</label>
             </div>
             <div class="message-body">
-                <p>O Bot Employee é um plugin para auxiliar nas tarefas operacionais e BI do seu negócio</p>
+                <p class="mb-3">Nesta seção você pode visualizar relatórios detalhados de todas as execuções de automação realizadas.</p>
+                <p>Os relatórios incluem informações sobre:</p>
+                <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                    <li>Status de cada função executada (sucesso ou falha)</li>
+                    <li>Número de tentativas realizadas</li>
+                    <li>Data e hora das execuções</li>
+                    <li>Resumo geral com estatísticas</li>
+                </ul>
+                <p class="mt-3"><strong>💡 Dica:</strong> Execute algumas automações na aba "Tarefas" para gerar relatórios.</p>
             </div>
         </div>
 
-        <div class="message">
-            <div class="message-header">
-                <label>Avisos</label>
+        <!-- Área de Relatórios -->
+        <div class="box mt-5">
+            <h2 class="is-size-4 has-text-link mb-3">📈 Relatórios de Execução</h2>
+            
+            <div class="buttons mb-3">
+                <button id="btn-carregar-relatorio" class="button is-link">🔄 Atualizar Relatório</button>
             </div>
-            <div class="message-body">
-                <p>Para que o plugin funcione corretamente alguns requisitos precisam ser atendidos, certifique-se que:
-                </p>
-                <p>Há conexão com a internet no mínimo 10 mega !;</p>
-                <p>Que não esta havendo manutenção em algum dos sites que ela utiliza !;</p>
-                <p>Se mesmo satisfeitas as condições acima o plugin não funcionar entrar em contato
-                <address>vinifreitass20@gmail.com</address>
-                </p>
+
+            <!-- Mensagem de carregamento -->
+            <div id="loading-message" class="message is-info" style="display: none;">
+                <div class="message-body">
+                    <span class="spinner"></span>Carregando relatório...
+                </div>
             </div>
+
+            <!-- Mensagem de erro -->
+            <div id="error-message" class="message is-danger" style="display: none;"></div>
+
+            <!-- Container do relatório -->
+            <div id="report-container"></div>
         </div>
+
     </main>
 </body>
 

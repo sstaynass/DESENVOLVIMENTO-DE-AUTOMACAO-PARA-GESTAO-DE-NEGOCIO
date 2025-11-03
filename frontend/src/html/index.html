@@ -6,12 +6,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-  <title>Bot Employee</title>
+  <title>Bot Employee - Home</title>
   <style>
     body {
       width: 630px;
     }
+    .feature-card {
+      margin-bottom: 1rem;
+      padding: 1rem;
+      border-left: 3px solid #3273dc;
+      background-color: #f5f5f5;
+    }
   </style>
+  <script src="../js/navigation.js"></script>
 </head>
 
 <body>
@@ -21,36 +28,72 @@
     <h1 class="is-size-3 has-text-link mx-4 mb-3 has-text-centered">Bot Employee</h1>
     <div class="fixed-grid has-4-cols">
       <nav class="grid buttons are-normal">
-        <button class="column button"><a href="index.html">Home</a></button>
-        <button class="column button"><a href="tarefas.html">Tarefas</a></button>
-        <button class="column button"><a href="analisticos.html">Analíticos</a></button>
-        <button class="column button"><a href="sobre.html">Sobre</a></button>
+        <button class="column button" data-nav="index.html">Home</button>
+        <button class="column button" data-nav="tarefas.html">Tarefas</button>
+        <button class="column button" data-nav="analisticos.html">Analíticos</button>
+        <button class="column button" data-nav="sobre.html">Sobre</button>
       </nav>
     </div>
 
-    <!--Mensagens-->
-    <div class="message">
+    <!--Bem-vindo-->
+    <div class="message is-info mt-5">
       <div class="message-header">
-        <label>Bem vindo !</label>
+        <label>👋 Bem-vindo ao Bot Employee!</label>
       </div>
       <div class="message-body">
-        <p>O Bot Employee é um plugin para auxiliar nas tarefas operacionais e BI do seu negócio</p>
+        <p class="mb-3"><strong>O Bot Employee é uma solução completa para automação de tarefas operacionais e análise de dados do seu negócio.</strong></p>
+        <p>Com este plugin, você pode automatizar processos repetitivos, acompanhar execuções em tempo real e gerar relatórios detalhados das suas operações.</p>
       </div>
     </div>
 
-    <div class="message">
-      <div class="message-header">
-        <label>Avisos</label>
+    <!--Funcionalidades-->
+    <div class="box mt-5">
+      <h2 class="is-size-4 has-text-link mb-4">🚀 Principais Funcionalidades</h2>
+      
+      <div class="feature-card">
+        <h3 class="is-size-5 mb-2">📋 Automação de Tarefas</h3>
+        <p>Acesse a aba <strong>Tarefas</strong> para executar rotinas automatizadas como follow-ups, registro de notas fiscais e outras automações personalizadas.</p>
       </div>
-      <div class="message-body">
-        <p>Para que o plugin funcione corretamente alguns requisitos precisam ser atendidos, certifique-se que:</p>
-        <p>Há conexão com a internet no mínimo 10 mega !;</p>
-        <p>Que não esta havendo manutenção em algum dos sites que ela utiliza !;</p>
-        <p>Se mesmo satisfeitas as condições acima o plugin não funcionar entrar em contato
-        <address>vinifreitass20@gmail.com</address>
-        </p>
+
+      <div class="feature-card">
+        <h3 class="is-size-5 mb-2">📊 Relatórios e Analytics</h3>
+        <p>Na aba <strong>Analíticos</strong>, visualize relatórios detalhados de todas as execuções, com estatísticas de sucesso, falhas e tentativas.</p>
+      </div>
+
+      <div class="feature-card">
+        <h3 class="is-size-5 mb-2">⚡ Execução em Tempo Real</h3>
+        <p>Acompanhe o progresso das suas automações passo a passo, com feedback visual em tempo real durante toda a execução.</p>
       </div>
     </div>
+
+    <!--Requisitos-->
+    <div class="message is-warning mt-5">
+      <div class="message-header">
+        <label>⚠️ Requisitos do Sistema</label>
+      </div>
+      <div class="message-body">
+        <p>Para garantir o funcionamento adequado do plugin, certifique-se de:</p>
+        <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+          <li>Conexão com internet estável (mínimo 10 Mbps)</li>
+          <li>Backend rodando na porta 3333 (localhost)</li>
+          <li>Não estar em período de manutenção dos sites utilizados</li>
+        </ul>
+        <p class="mt-3"><small>Em caso de problemas, entre em contato: <address style="display: inline;">vinifreitass20@gmail.com</address></small></p>
+      </div>
+    </div>
+
+    <!--Início Rápido-->
+    <div class="message is-success mt-5">
+      <div class="message-header">
+        <label>🚀 Início Rápido</label>
+      </div>
+      <div class="message-body">
+        <p><strong>1.</strong> Vá para a aba <strong>Tarefas</strong> e selecione as rotinas que deseja executar</p>
+        <p><strong>2.</strong> Clique em "Disparar automações" e acompanhe o progresso em tempo real</p>
+        <p><strong>3.</strong> Acesse <strong>Analíticos</strong> para ver os relatórios completos das execuções</p>
+      </div>
+    </div>
+
   </main>
 </body>
 
