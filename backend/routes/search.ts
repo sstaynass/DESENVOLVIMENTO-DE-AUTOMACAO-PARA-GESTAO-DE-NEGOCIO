@@ -30,32 +30,37 @@ export async function acessSite(app: FastifyInstance) {
 		const body = request.body as { rotinas?: string[] } | undefined;
 		const rotinas = body?.rotinas || [];
 
-		const primitive = new Primitive();
+		// Usar apenas o retry, que já é um Primitive (herda de RetryToolkit que herda de Primitive)
 		const retry = new RetryToolkitWithAsyncReport();
 
-		retry.setTaskName("preenchimento automatizado do formulário");
+		try {
+			retry.setTaskName("preenchimento automatizado do formulário");
 
-		await retry.retryable(
-			() => primitive.setSite("https://docs.google.com/forms/d/1s_-oo76aKv9DvrEyQequ2XD1Trqm9nQmlft_z_7YGjI/edit"),
-			3,
-			3000,
-			"acesso ao site do forms",
-		);
-		await retry.retryable(
-			() => preencheDados(primitive),
-			3,
-			3000,
-			"preenchimento dos dados",
-		);
-		await retry.retryable(
-			() => primitive.setClick("paginaPrincipal.botao"),
-			3,
-			3000,
-			"envio do formulário",
-		);
-		
-		retry.saveReport();
+			await retry.retryable(
+				() => retry.setSite("https://docs.google.com/forms/d/1s_-oo76aKv9DvrEyQequ2XD1Trqm9nQmlft_z_7YGjI/edit"),
+				3,
+				3000,
+				"acesso ao site do forms",
+			);
+			await retry.retryable(
+				() => preencheDados(retry),
+				3,
+				3000,
+				"preenchimento dos dados",
+			);
+			await retry.retryable(
+				() => retry.setClick("paginaPrincipal.botao"),
+				3,
+				3000,
+				"envio do formulário",
+			);
+			
+			retry.saveReport();
 
-		return { message: "Scraping realizado com sucesso!" };
+			return { message: "Scraping realizado com sucesso!" };
+		} finally {
+			// Garante que o driver seja fechado mesmo em caso de erro
+			await retry.setDriverClose();
+		}
 	});
 }

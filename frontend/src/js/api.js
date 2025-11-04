@@ -17,15 +17,22 @@ async function apiRequest(endpoint, data = null) {
             },
         };
 
-        if (data) {
-            options.body = JSON.stringify(data);
-        }
+        // Sempre enviar body, mesmo que vazio (Fastify requer body para POST)
+        options.body = data ? JSON.stringify(data) : JSON.stringify({});
 
         const response = await fetch(`${API_BASE_URL}${endpoint}`, options);
 
         if (!response.ok) {
-            const errorData = await response.json().catch(() => ({ error: 'Erro desconhecido' }));
-            throw new Error(errorData.error || `Erro HTTP: ${response.status}`);
+            let errorMessage = `Erro HTTP: ${response.status}`;
+            try {
+                const errorData = await response.json();
+                errorMessage = errorData.error || errorMessage;
+            } catch (e) {
+                // Se não conseguir parsear JSON, usar mensagem padrão
+                const text = await response.text().catch(() => '');
+                errorMessage = text || errorMessage;
+            }
+            throw new Error(errorMessage);
         }
 
         return await response.json();
@@ -36,7 +43,7 @@ async function apiRequest(endpoint, data = null) {
 }
 
 /**
- * Dispara uma automação de busca/scraping
+ * Dispara uma automação de busca/scraping (Follow Up)
  * @param {string[]} rotinas - Array com as rotinas selecionadas
  * @returns {Promise<object>} Resposta da API
  */
@@ -45,16 +52,51 @@ async function dispararAutomacao(rotinas) {
 }
 
 /**
+ * Dispara uma automação de registro de notas fiscais
+ * @param {string[]} rotinas - Array com as rotinas selecionadas
+ * @returns {Promise<object>} Resposta da API
+ */
+async function dispararReader(rotinas) {
+    return await apiRequest('/reader', { rotinas });
+}
+
+/**
  * Busca o relatório de execução
  * @returns {Promise<object>} Dados do relatório
  */
 async function buscarRelatorio() {
-    return await apiRequest('/report');
+    // Usar GET para buscar relatório (não precisa enviar dados)
+    try {
+        const response = await fetch(`${API_BASE_URL}/report`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+
+        if (!response.ok) {
+            let errorMessage = `Erro HTTP: ${response.status}`;
+            try {
+                const errorData = await response.json();
+                errorMessage = errorData.error || errorMessage;
+            } catch (e) {
+                const text = await response.text().catch(() => '');
+                errorMessage = text || errorMessage;
+            }
+            throw new Error(errorMessage);
+        }
+
+        return await response.json();
+    } catch (error) {
+        console.error('Erro na requisição para /report:', error);
+        throw error;
+    }
 }
 
 // Exportar funções para uso global
 window.API = {
     dispararAutomacao,
+    dispararReader,
     buscarRelatorio,
     apiRequest
 };

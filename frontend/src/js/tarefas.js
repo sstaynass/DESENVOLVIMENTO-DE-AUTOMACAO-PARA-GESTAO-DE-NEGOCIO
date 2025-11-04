@@ -174,8 +174,18 @@ document.addEventListener('DOMContentLoaded', () => {
             return stepDiv;
         });
 
-        // Fazer requisição ao backend em paralelo com o progresso visual
-        const requestPromise = window.API.dispararAutomacao([rotina]);
+        // Determinar qual rota chamar baseado na rotina selecionada
+        let requestPromise;
+        if (rotina === 'follow-up') {
+            // Chamar rota /search para Follow Up
+            requestPromise = window.API.dispararAutomacao([rotina]);
+        } else if (rotina === 'notas-fiscais') {
+            // Chamar rota /reader para Notas Fiscais
+            requestPromise = window.API.dispararReader([rotina]);
+        } else {
+            // Para outras rotinas, usar a rota padrão
+            requestPromise = window.API.dispararAutomacao([rotina]);
+        }
 
         // Simular progresso das etapas enquanto a requisição está rodando
         let requestCompleted = false;

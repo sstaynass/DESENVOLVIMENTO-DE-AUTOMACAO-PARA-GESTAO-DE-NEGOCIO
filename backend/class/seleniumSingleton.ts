@@ -1,9 +1,15 @@
+/**
+ * @deprecated Esta classe foi substituída por SeleniumDriverFactory para permitir paralelismo.
+ * Use SeleniumDriverFactory.createDriver() ao invés desta classe.
+ * Mantida apenas para referência histórica.
+ */
 import { Browser, Builder, type WebDriver } from "selenium-webdriver";
 import chrome from "selenium-webdriver/chrome";
 import edge from "selenium-webdriver/edge";
 
 type browser = "chrome" | "edge";
 
+/** @deprecated Use SeleniumDriverFactory ao invés desta classe */
 export class seleniumSingleton {
 	private static instance: seleniumSingleton;
 	private driver: WebDriver;

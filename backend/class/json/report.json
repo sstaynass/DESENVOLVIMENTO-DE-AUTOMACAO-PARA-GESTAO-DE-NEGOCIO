@@ -1,27 +1,350 @@
-{
-  "task": "preenchimento automatizado do formulário",
-  "status": "sucesso",
-  "dataHora": "2025-11-03T22:48:49.996Z",
-  "funcoes": {
-    "acesso ao site do forms": {
-      "nome": "acesso ao site do forms",
-      "status": "sucesso",
-      "tentativas": 1
+[
+  {
+    "task": "preenchimento automatizado do formulário",
+    "status": "sucesso",
+    "dataHora": "2025-11-03T22:48:49.996Z",
+    "funcoes": {
+      "acesso ao site do forms": {
+        "nome": "acesso ao site do forms",
+        "status": "sucesso",
+        "tentativas": 1
+      },
+      "preenchimento dos dados": {
+        "nome": "preenchimento dos dados",
+        "status": "sucesso",
+        "tentativas": 1
+      },
+      "envio do formulário": {
+        "nome": "envio do formulário",
+        "status": "sucesso",
+        "tentativas": 1
+      }
     },
-    "preenchimento dos dados": {
-      "nome": "preenchimento dos dados",
-      "status": "sucesso",
-      "tentativas": 1
-    },
-    "envio do formulário": {
-      "nome": "envio do formulário",
-      "status": "sucesso",
-      "tentativas": 1
+    "resumo": {
+      "totalFuncoes": 3,
+      "funcoesSucesso": 3,
+      "funcoesFalha": 0
     }
   },
-  "resumo": {
-    "totalFuncoes": 3,
-    "funcoesSucesso": 3,
-    "funcoesFalha": 0
+  {
+    "task": "preenchimento automatizado do formulário",
+    "status": "sucesso",
+    "dataHora": "2025-11-03T23:05:37.624Z",
+    "funcoes": {
+      "acesso ao site do forms": {
+        "nome": "acesso ao site do forms",
+        "status": "sucesso",
+        "tentativas": 1
+      },
+      "preenchimento dos dados": {
+        "nome": "preenchimento dos dados",
+        "status": "sucesso",
+        "tentativas": 1
+      },
+      "envio do formulário": {
+        "nome": "envio do formulário",
+        "status": "sucesso",
+        "tentativas": 1
+      }
+    },
+    "resumo": {
+      "totalFuncoes": 3,
+      "funcoesSucesso": 3,
+      "funcoesFalha": 0
+    }
+  },
+  {
+    "task": "preenchimento automatizado do formulário",
+    "status": "sucesso",
+    "dataHora": "2025-11-03T23:23:10.126Z",
+    "funcoes": {
+      "acesso ao site do forms": {
+        "nome": "acesso ao site do forms",
+        "status": "sucesso",
+        "tentativas": 1
+      },
+      "preenchimento dos dados": {
+        "nome": "preenchimento dos dados",
+        "status": "sucesso",
+        "tentativas": 1
+      },
+      "envio do formulário": {
+        "nome": "envio do formulário",
+        "status": "sucesso",
+        "tentativas": 1
+      }
+    },
+    "resumo": {
+      "totalFuncoes": 3,
+      "funcoesSucesso": 3,
+      "funcoesFalha": 0
+    }
+  },
+  {
+    "task": "registro automatizado de notas fiscais",
+    "status": "sucesso",
+    "dataHora": "2025-11-03T23:32:40.670Z",
+    "funcoes": {
+      "acesso ao sistema de notas fiscais": {
+        "nome": "acesso ao sistema de notas fiscais",
+        "status": "sucesso",
+        "tentativas": 1
+      },
+      "processamento das notas fiscais": {
+        "nome": "processamento das notas fiscais",
+        "status": "sucesso",
+        "tentativas": 1
+      },
+      "envio do registro": {
+        "nome": "envio do registro",
+        "status": "sucesso",
+        "tentativas": 1
+      }
+    },
+    "resumo": {
+      "totalFuncoes": 3,
+      "funcoesSucesso": 3,
+      "funcoesFalha": 0
+    }
+  },
+  {
+    "task": "preenchimento automatizado do formulário",
+    "status": "sucesso",
+    "dataHora": "2025-11-03T23:39:35.696Z",
+    "funcoes": {
+      "acesso ao site do forms": {
+        "nome": "acesso ao site do forms",
+        "status": "sucesso",
+        "tentativas": 1
+      },
+      "preenchimento dos dados": {
+        "nome": "preenchimento dos dados",
+        "status": "sucesso",
+        "tentativas": 1
+      },
+      "envio do formulário": {
+        "nome": "envio do formulário",
+        "status": "sucesso",
+        "tentativas": 1
+      }
+    },
+    "resumo": {
+      "totalFuncoes": 3,
+      "funcoesSucesso": 3,
+      "funcoesFalha": 0
+    }
+  },
+  {
+    "task": "registro automatizado de notas fiscais",
+    "status": "sucesso",
+    "dataHora": "2025-11-03T23:47:54.090Z",
+    "funcoes": {
+      "acesso ao sistema de notas fiscais": {
+        "nome": "acesso ao sistema de notas fiscais",
+        "status": "sucesso",
+        "tentativas": 1
+      },
+      "processamento das notas fiscais": {
+        "nome": "processamento das notas fiscais",
+        "status": "sucesso",
+        "tentativas": 1
+      },
+      "envio do registro": {
+        "nome": "envio do registro",
+        "status": "sucesso",
+        "tentativas": 1
+      }
+    },
+    "resumo": {
+      "totalFuncoes": 3,
+      "funcoesSucesso": 3,
+      "funcoesFalha": 0
+    }
+  },
+  {
+    "task": "preenchimento automatizado do formulário",
+    "status": "sucesso",
+    "dataHora": "2025-11-03T23:48:43.167Z",
+    "funcoes": {
+      "acesso ao site do forms": {
+        "nome": "acesso ao site do forms",
+        "status": "sucesso",
+        "tentativas": 1
+      },
+      "preenchimento dos dados": {
+        "nome": "preenchimento dos dados",
+        "status": "sucesso",
+        "tentativas": 1
+      },
+      "envio do formulário": {
+        "nome": "envio do formulário",
+        "status": "sucesso",
+        "tentativas": 1
+      }
+    },
+    "resumo": {
+      "totalFuncoes": 3,
+      "funcoesSucesso": 3,
+      "funcoesFalha": 0
+    }
+  },
+  {
+    "task": "registro automatizado de notas fiscais",
+    "status": "sucesso",
+    "dataHora": "2025-11-03T23:49:11.162Z",
+    "funcoes": {
+      "acesso ao sistema de notas fiscais": {
+        "nome": "acesso ao sistema de notas fiscais",
+        "status": "sucesso",
+        "tentativas": 1
+      },
+      "processamento das notas fiscais": {
+        "nome": "processamento das notas fiscais",
+        "status": "sucesso",
+        "tentativas": 1
+      },
+      "envio do registro": {
+        "nome": "envio do registro",
+        "status": "sucesso",
+        "tentativas": 1
+      }
+    },
+    "resumo": {
+      "totalFuncoes": 3,
+      "funcoesSucesso": 3,
+      "funcoesFalha": 0
+    }
+  },
+  {
+    "task": "preenchimento automatizado do formulário",
+    "status": "sucesso",
+    "dataHora": "2025-11-03T23:51:10.413Z",
+    "funcoes": {
+      "acesso ao site do forms": {
+        "nome": "acesso ao site do forms",
+        "status": "sucesso",
+        "tentativas": 1
+      },
+      "preenchimento dos dados": {
+        "nome": "preenchimento dos dados",
+        "status": "sucesso",
+        "tentativas": 1
+      },
+      "envio do formulário": {
+        "nome": "envio do formulário",
+        "status": "sucesso",
+        "tentativas": 1
+      }
+    },
+    "resumo": {
+      "totalFuncoes": 3,
+      "funcoesSucesso": 3,
+      "funcoesFalha": 0
+    }
+  },
+  {
+    "task": "registro automatizado de notas fiscais",
+    "status": "sucesso",
+    "dataHora": "2025-11-04T00:02:16.370Z",
+    "funcoes": {
+      "processamento das notas fiscais": {
+        "nome": "processamento das notas fiscais",
+        "status": "sucesso",
+        "tentativas": 1
+      }
+    },
+    "resumo": {
+      "totalFuncoes": 1,
+      "funcoesSucesso": 1,
+      "funcoesFalha": 0
+    }
+  },
+  {
+    "task": "preenchimento automatizado do formulário",
+    "status": "sucesso",
+    "dataHora": "2025-11-04T00:04:34.669Z",
+    "funcoes": {
+      "acesso ao site do forms": {
+        "nome": "acesso ao site do forms",
+        "status": "sucesso",
+        "tentativas": 1
+      },
+      "preenchimento dos dados": {
+        "nome": "preenchimento dos dados",
+        "status": "sucesso",
+        "tentativas": 1
+      },
+      "envio do formulário": {
+        "nome": "envio do formulário",
+        "status": "sucesso",
+        "tentativas": 1
+      }
+    },
+    "resumo": {
+      "totalFuncoes": 3,
+      "funcoesSucesso": 3,
+      "funcoesFalha": 0
+    }
+  },
+  {
+    "task": "registro automatizado de notas fiscais",
+    "status": "sucesso",
+    "dataHora": "2025-11-04T00:04:50.024Z",
+    "funcoes": {
+      "processamento das notas fiscais": {
+        "nome": "processamento das notas fiscais",
+        "status": "sucesso",
+        "tentativas": 1
+      }
+    },
+    "resumo": {
+      "totalFuncoes": 1,
+      "funcoesSucesso": 1,
+      "funcoesFalha": 0
+    }
+  },
+  {
+    "task": "preenchimento automatizado do formulário",
+    "status": "sucesso",
+    "dataHora": "2025-11-04T00:10:20.580Z",
+    "funcoes": {
+      "acesso ao site do forms": {
+        "nome": "acesso ao site do forms",
+        "status": "sucesso",
+        "tentativas": 1
+      },
+      "preenchimento dos dados": {
+        "nome": "preenchimento dos dados",
+        "status": "sucesso",
+        "tentativas": 1
+      },
+      "envio do formulário": {
+        "nome": "envio do formulário",
+        "status": "sucesso",
+        "tentativas": 1
+      }
+    },
+    "resumo": {
+      "totalFuncoes": 3,
+      "funcoesSucesso": 3,
+      "funcoesFalha": 0
+    }
+  },
+  {
+    "task": "registro automatizado de notas fiscais",
+    "status": "sucesso",
+    "dataHora": "2025-11-04T00:10:35.585Z",
+    "funcoes": {
+      "processamento das notas fiscais": {
+        "nome": "processamento das notas fiscais",
+        "status": "sucesso",
+        "tentativas": 1
+      }
+    },
+    "resumo": {
+      "totalFuncoes": 1,
+      "funcoesSucesso": 1,
+      "funcoesFalha": 0
+    }
   }
-}
+]

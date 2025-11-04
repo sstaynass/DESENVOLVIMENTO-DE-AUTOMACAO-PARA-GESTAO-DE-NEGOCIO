@@ -117,9 +117,25 @@ export class RetryToolkitWithAsyncReport extends RetryToolkit {
 		const caminho = path.resolve(__dirname, nomeArquivo);
 
 		// Serializa as gravações para evitar escritas concorrentes
-		this.writeLock = this.writeLock.then(() =>
-			fs.writeFile(caminho, JSON.stringify(this.report, null, 2), "utf-8"),
-		);
+		this.writeLock = this.writeLock.then(async () => {
+			// Ler relatórios existentes ou criar novo array
+			let reports: ReportTask[] = [];
+			try {
+				const existingData = await fs.readFile(caminho, "utf-8");
+				const parsed = JSON.parse(existingData);
+				// Se for array, usar diretamente; se for objeto único, converter para array
+				reports = Array.isArray(parsed) ? parsed : [parsed];
+			} catch (err) {
+				// Arquivo não existe ou está vazio, começar com array vazio
+				reports = [];
+			}
+
+			// Adicionar novo relatório ao array
+			reports.push(this.report);
+
+			// Salvar array completo
+			await fs.writeFile(caminho, JSON.stringify(reports, null, 2), "utf-8");
+		});
 		await this.writeLock;
 		console.log(`Relatório salvo em ${caminho}`);
 	}

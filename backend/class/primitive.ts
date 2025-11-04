@@ -1,14 +1,23 @@
 import { By, until, type WebDriver, type WebElement } from "selenium-webdriver";
 import { loadSelector } from "./loadSelector";
-import { seleniumSingleton } from "./seleniumSingleton";
+import { SeleniumDriverFactory } from "./seleniumDriverFactory";
 
 export class Primitive {
-	protected driver: WebDriver;
-	constructor() {
+	protected driver: WebDriver | null;
+	private browser: "chrome" | "edge";
+	private options: string;
+
+	/**
+	 * Cria uma nova instância do Primitive com seu próprio driver
+	 * Permite paralelismo removendo o padrão Singleton
+	 * @param browser - Tipo de navegador (padrão: "chrome")
+	 * @param optionsArg - Argumentos para o navegador (padrão: "--start-fullscreen")
+	 */
+	constructor(browser: "chrome" | "edge" = "chrome", optionsArg: string = "--start-fullscreen") {
 		try {
-			this.driver = seleniumSingleton
-				.getInstance("chrome", "--start-fullscreen")
-				.getDriver();
+			this.browser = browser;
+			this.options = optionsArg;
+			this.driver = SeleniumDriverFactory.createDriver(browser, optionsArg);
 		} catch (e) {
 			console.error("Erro ao inicializar driver no Primitive:", e);
 			throw e;
@@ -20,8 +29,12 @@ export class Primitive {
 			size: "one" | "all",
 			time: number = 10000,
 			selectorBuilder?: (baseSelector: string) => string
-		){
+	){
 			try {
+				if (!this.driver) {
+					throw new Error("Driver não está inicializado!");
+				}
+
 				let selector = await loadSelector(pathSelector);
 
 				const driver = this.driver;
@@ -67,6 +80,9 @@ export class Primitive {
 
 	public async setSite(site: string) {
 		try {
+			if (!this.driver) {
+				throw new Error("Driver não está inicializado!");
+			}
 			await this.driver.get(site);
 		} catch (e) {
 			console.error("Erro ao abrir site:", e);
@@ -103,14 +119,42 @@ export class Primitive {
 		}
 	}
 
+	/**
+	 * Fecha o driver de forma segura
+	 * Garante que o recurso seja liberado mesmo em caso de erro
+	 */
 	public async setDriverClose() {
 		if (!this.driver) {
-			throw new Error("Driver não inicializado!");
+			console.warn("Driver não inicializado, nada a fechar.");
+			return { message: "Driver não estava inicializado" };
 		}
-		await this.driver.quit(); // ✅ fecha o navegador inteiro
+		const driverToClose = this.driver;
+		this.driver = null; // Marca como null imediatamente para evitar uso após fechamento
+		await SeleniumDriverFactory.closeDriver(driverToClose);
 		return { message: "Driver fechado com sucesso\n\r\r" };
 	}
+
+	/**
+	 * Verifica se o driver está ativo
+	 */
+	public isDriverActive(): boolean {
+		return this.driver !== null && this.driver !== undefined;
+	}
+
+	/**
+	 * Obtém o driver (para uso em serviços externos)
+	 * @throws Error se o driver não estiver inicializado
+	 */
+	public getDriver(): WebDriver {
+		if (!this.driver) {
+			throw new Error("Driver não está inicializado!");
+		}
+		return this.driver;
+	}
 	public async setSleep(time: number = 1000) {
+		if (!this.driver) {
+			throw new Error("Driver não está inicializado!");
+		}
 		await this.driver.sleep(time)
 	}
 }
